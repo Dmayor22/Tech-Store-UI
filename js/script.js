@@ -74,5 +74,77 @@ const products = [
   },
 ];
 
-// variables
+// DOM variables
 const productWrapper = document.getElementById("products-wrapper");
+const checkBoxes = document.querySelectorAll(".check");
+const filterContainer = document.getElementById("filters-container");
+const searchInput = document.getElementById("search");
+const cartCount = document.getElementById("cartCount");
+
+// Init cart item count
+let cartItemCount = 0;
+
+// Init product element array
+const productEls = [];
+
+// looping over products from mock data and create an element
+products.forEach((product) => {
+  const productEl = createProductElement(product);
+  productWrapper.appendChild(productEl);
+
+  // push to product array
+  productEls.push(productEl);
+});
+
+
+// function to create productElemet
+function createProductElement(product) {
+  const productEl = document.createElement("div");
+  productEl.className = "item space-y-2";
+  productEl.innerHTML = `          <div
+            class="bg-gray-100 flex justify-center relative overflow-hidden group cursor-pointer border rounded-xl"
+          >
+            <img
+              src=${product.url}
+              alt=${product.name}
+              class="w-full f-full object-cover"
+            />
+            <button
+              class="status bg-black text-white absolute bottom-0 left-0 right-0 text-center py-2 transition translate-y-full group-hover:translate-y-0 cursor-pointer"
+            >
+              Add To Cart
+            </button>
+          </div>
+          <p class="text-xl">${product.name}</p>
+          <strong>$${product.price.toLocaleString()}</strong>`;
+
+  productEl.querySelector(".status").addEventListener("click", updateCartCount);
+
+  return productEl;
+}
+
+// function to updateCartCount
+function updateCartCount(e) {
+  const statusEl = e.target;
+
+  if (statusEl.classList.contains('added')) {
+    // Remove from cart
+    statusEl.classList.remove('added');
+    statusEl.innerText = 'Add To Cart';
+    statusEl.classList.remove('bg-red-600');
+    statusEl.classList.add('bg-gray-800');
+
+    cartItemCount--;
+  } else {
+    // Add to cart
+    statusEl.classList.add('added');
+    statusEl.innerText = 'Remove From Cart';
+    statusEl.classList.remove('bg-gray-800');
+    statusEl.classList.add('bg-red-600');
+
+    cartItemCount++;
+  }
+
+  // Update cart item count
+  cartCount.innerText = cartItemCount.toString();
+}

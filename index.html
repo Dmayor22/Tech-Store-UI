@@ -68,7 +68,7 @@
 
     <!-- main content -->
     <main class="flex flex-col md:flex-row container mx-auto max-w-6xl">
-      <!-- sidebar -->
+      <!-- category sidebar -->
       <div class="space-y-4 p-2 w-full max-w-40">
         <h2 class="text-2xl">Filters</h2>
         <h3 class="text-xl">Category</h3>
@@ -92,6 +92,75 @@
           </div>
         </div>
       </div>
+
+      <!-- Products Wrapper -->
+      <div
+        id="products-wrapper"
+        class="w-full max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-6 place-content-center p-4"
+      >
+        <!-- product individual div container-->
+        <!-- item 1 -->
+        <div class="item space-y-2">
+          <div
+            class="bg-gray-100 flex justify-center relative overflow-hidden group cursor-pointer border rounded-xl"
+          >
+            <img
+              src="./images/playstation_5.png"
+              alt="playstation_5"
+              class="w-full f-full object-cover"
+            />
+            <button
+              class="status bg-black text-white absolute bottom-0 left-0 right-0 text-center py-2 transition translate-y-full group-hover:translate-y-0 cursor-pointer"
+            >
+              Add To Cart
+            </button>
+          </div>
+          <p class="text-xl">Playstation_5</p>
+          <strong>$399</strong>
+        </div>
+
+        <!-- item 2 -->
+        <div class="item space-y-2">
+          <div
+            class="bg-gray-100 flex justify-center relative overflow-hidden group cursor-pointer border rounded-xl"
+          >
+            <img
+              src="./images/samsung_galaxy.png"
+              alt="playstation_5"
+              class="w-full f-full object-cover"
+            />
+            <button
+              class="status bg-black text-white absolute bottom-0 left-0 right-0 text-center py-2 transition translate-y-full group-hover:translate-y-0 cursor-pointer"
+            >
+              Add To Cart
+            </button>
+          </div>
+          <p class="text-xl">Samsung_galaxy</p>
+          <strong>$399</strong>
+        </div>
+
+        <!-- item 3 -->
+        <div class="item space-y-2">
+          <div
+            class="bg-gray-100 flex justify-center relative overflow-hidden group cursor-pointer border rounded-xl"
+          >
+            <img
+              src="./images/sony_a7_camera.png"
+              alt="playstation_5"
+              class="w-full f-full object-cover"
+            />
+            <button
+              class="status bg-black text-white absolute bottom-0 left-0 right-0 text-center py-2 transition translate-y-full group-hover:translate-y-0 cursor-pointer"
+            >
+              Add To Cart
+            </button>
+          </div>
+          <p class="text-xl">Sony A7 Camera</p>
+          <strong>$399</strong>
+        </div>
+      </div>
     </main>
+
+    <script src="./js/script.js"></script>
   </body>
 </html>

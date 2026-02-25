@@ -87,6 +87,10 @@ let cartItemCount = 0;
 // Init product element array
 const productEls = [];
 
+// Event Listeners for filtering
+filterContainer.addEventListener("change", filterProduct);
+searchInput.addEventListener("input", filterProduct);
+
 // looping over products from mock data and create an element
 products.forEach((product) => {
   const productEl = createProductElement(product);
@@ -95,7 +99,6 @@ products.forEach((product) => {
   // push to product array
   productEls.push(productEl);
 });
-
 
 // function to create productElemet
 function createProductElement(product) {
@@ -127,24 +130,52 @@ function createProductElement(product) {
 function updateCartCount(e) {
   const statusEl = e.target;
 
-  if (statusEl.classList.contains('added')) {
+  if (statusEl.classList.contains("added")) {
     // Remove from cart
-    statusEl.classList.remove('added');
-    statusEl.innerText = 'Add To Cart';
-    statusEl.classList.remove('bg-red-600');
-    statusEl.classList.add('bg-gray-800');
+    statusEl.classList.remove("added");
+    statusEl.innerText = "Add To Cart";
+    statusEl.classList.remove("bg-red-600");
+    statusEl.classList.add("bg-gray-800");
 
     cartItemCount--;
   } else {
     // Add to cart
-    statusEl.classList.add('added');
-    statusEl.innerText = 'Remove From Cart';
-    statusEl.classList.remove('bg-gray-800');
-    statusEl.classList.add('bg-red-600');
+    statusEl.classList.add("added");
+    statusEl.innerText = "Remove From Cart";
+    statusEl.classList.remove("bg-gray-800");
+    statusEl.classList.add("bg-red-600");
 
     cartItemCount++;
   }
 
   // Update cart item count
   cartCount.innerText = cartItemCount.toString();
+}
+
+// filter Products by checkbox searchInput
+function filterProduct() {
+  // Get the search term by user
+  const searchTerm = searchInput.value.trim().toLowerCase();
+  // Get checked categories
+  const checkedCategories = Array.from(checkBoxes)
+    .filter((check) => check.checked)
+    .map((check) => check.id);
+
+  // loop over products and check for matches
+  productEls.forEach((prod, index) => {
+    const product = products[index];
+
+    // check to see if the product matches search or checked categories
+    const matchesSearchTerm = product.name.toLowerCase().includes(searchTerm);
+    const isInChecked =
+      checkedCategories.length === 0 ||
+      checkedCategories.includes(product.category);
+
+    // show or hide product based on matches
+    if (matchesSearchTerm && isInChecked) {
+      prod.classList.remove("hidden");
+    } else {
+      prod.classList.add("hidden");
+    }
+  });
 }
